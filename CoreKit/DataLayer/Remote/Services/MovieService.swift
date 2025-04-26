@@ -11,11 +11,10 @@ import Alamofire
 public enum MovieService {
     case popular(auth: String, page: Int? = nil, region: String? = nil, language: String? = nil)
     case movie(auth: String, id: Int, language: String? = nil)
-    case similar(auth: String, id: Int, page: Int? = nil, language: String? = nil)
 }
 
 extension MovieService: MoviesDBService {
-    public var mainRoute: String { return "movie/" }
+    public var mainRoute: String { return "discover/" }
 
     public var requestConfiguration: RequestConfiguration {
         switch self {
@@ -30,9 +29,10 @@ extension MovieService: MoviesDBService {
             if let language = language {
                 parameters["language"] = language
             }
+            parameters["primary_release_year"] = 2024
             return RequestConfiguration(
                 method: .get,
-                path: mainRoute.appending("popular"),
+                path: mainRoute.appending("movie"),
                 parameters: parameters,
                 encoding: URLEncoding.queryString,
                 language: language
@@ -45,21 +45,6 @@ extension MovieService: MoviesDBService {
             return RequestConfiguration(
                 method: .get,
                 path: mainRoute.appending("\(id)"),
-                parameters: parameters,
-                encoding: URLEncoding.default,
-                language: language
-            )
-        case let .similar(auth, id, page, language):
-            var parameters: [String: Any] = ["api_key": auth]
-            if let page = page {
-                parameters["page"] = page
-            }
-            if let language = language {
-                parameters["language"] = language
-            }
-            return RequestConfiguration(
-                method: .get,
-                path: mainRoute.appending("\(id)/").appending("similar"),
                 parameters: parameters,
                 encoding: URLEncoding.default,
                 language: language

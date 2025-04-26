@@ -17,16 +17,19 @@ final class HomeViewController: NiblessNavigationController {
     
     private let viewModel: HomeNavigationViewModel
     private let rootViewController: HomeRootViewController
+    private let makeMovieDetailsViewController: ((Int, ToggledWatchlistResponder) -> MovieDetailsViewController)
     private var cancelable: Set<AnyCancellable> = []
     
     // MARK: - Methods
     
     init(
         viewModel: HomeNavigationViewModel,
-        rootViewController: HomeRootViewController
+        rootViewController: HomeRootViewController,
+        movieDetailsViewControllerFactory: @escaping (Int, ToggledWatchlistResponder) -> MovieDetailsViewController
     ) {
         self.viewModel = viewModel
         self.rootViewController = rootViewController
+        self.makeMovieDetailsViewController = movieDetailsViewControllerFactory
         super.init()
     }
     
@@ -54,15 +57,20 @@ final class HomeViewController: NiblessNavigationController {
     private func present(_ view: HomeView) {
         switch view {
         case .root:
-            print("id")
             presentHomeRootView()
         case let .details(id, responder):
-            print(id)
+            presentMovieDetails(using: id, responder: responder)
+        @unknown default:
+            break
         }
     }
     
     private func presentHomeRootView() {
         popToRootViewController(animated: false)
+    }
+    
+    private func presentMovieDetails(using id: Int, responder: ToggledWatchlistResponder) {
+        pushViewController(makeMovieDetailsViewController(id, responder), animated: true)
     }
 
 }

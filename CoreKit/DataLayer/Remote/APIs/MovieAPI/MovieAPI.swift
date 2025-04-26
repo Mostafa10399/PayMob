@@ -20,12 +20,5 @@ public protocol MovieAPI: RemoteAPI {
         id: Int,
         language: String?
     ) async throws -> Movie
-    
-    func getSimilarMovies(
-        auth: String,
-        id: Int,
-        page: Int?,
-        language: String?
-    ) async throws -> PaginationResponse<Movie>
 }
 

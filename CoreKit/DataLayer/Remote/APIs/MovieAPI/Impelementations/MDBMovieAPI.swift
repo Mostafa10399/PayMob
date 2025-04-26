@@ -44,20 +44,4 @@ final public class MDBMovieAPI: MovieAPI {
             )
         )
     }
-    
-    public func getSimilarMovies(
-        auth: String,
-        id: Int,
-        page: Int?,
-        language: String?
-    ) async throws -> PaginationResponse<Movie> {
-        try await request(
-            MovieService.similar(
-                auth: auth,
-                id: id,
-                page: page,
-                language: language
-            )
-        )
-    }
 }
