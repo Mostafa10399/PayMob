@@ -7,7 +7,7 @@
 
 import Foundation
 
-final public class UserDefaultWatchlistDataStore: WatchlistDataStore {
+public actor UserDefaultWatchlistDataStore: WatchlistDataStore {
     
     private let userDefaults = UserDefaults.standard
     private let watchlistKey = "UserDefaultWatchlistDataStore"
