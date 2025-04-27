@@ -14,6 +14,7 @@ public struct MovieDetailsPresentable: Hashable {
     public var isInWatchlist: Bool
     public let rate: String
     public let releaseDate: String
+    public let language: String
     
     init(_ movieTuple: MovieWithWatchlist) {
         if let poster = movieTuple.movie.posterPath {
@@ -25,6 +26,8 @@ public struct MovieDetailsPresentable: Hashable {
         self.overview = movieTuple.movie.overview ?? ""
         self.isInWatchlist = movieTuple.isInWatchlist
         self.releaseDate = movieTuple.movie.releaseDate ?? "Unkown"
-        self.rate = "\(movieTuple.movie.voteAverage ?? 0)"
+        self.rate = String(format: "%.1f", movieTuple.movie.voteAverage ?? 0)
+        self.language = movieTuple.movie.originalLanguage ?? "Unknown"
     }
+    
 }

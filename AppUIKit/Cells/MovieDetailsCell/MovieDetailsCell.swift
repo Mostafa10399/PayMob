@@ -11,6 +11,7 @@ import CoreKit
 
 final public class MovieDetailsCell: UITableViewCell {
 
+    @IBOutlet weak var language: UILabel!
     @IBOutlet private(set) public weak var thumbnailImage: UIImageView!
     @IBOutlet private(set) public weak var titleLabel: UILabel! {
         didSet {
@@ -37,6 +38,7 @@ final public class MovieDetailsCell: UITableViewCell {
         revenueLabel.text = item.rate
         releaseDateLabel.text = item.releaseDate
         watchlistButton.setImage(item.isInWatchlist ? UIImage(resource: .bookmarkActive) : UIImage(resource: .bookmark), for: .normal)
+        language.text = item.language
     }
 
 }

@@ -13,6 +13,7 @@ public struct Movie: Codable {
     let posterPath: String?
     let releaseDate: String?
     let voteAverage: Double?
+    let originalLanguage: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -21,5 +22,6 @@ public struct Movie: Codable {
         case releaseDate = "release_date"
         case title
         case voteAverage = "vote_average"
+        case originalLanguage = "original_language"
     }
 }
