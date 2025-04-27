@@ -12,7 +12,7 @@
 To get started by cloning the repository:
 
 ```bash
-git clone https://github.com/Mostafa10399/Movie-Task
+git clone https://github.com/Mostafa10399/PayMob
 ```
 
 ## 🛠 Stack & Architecture
