@@ -14,7 +14,7 @@ public enum MovieService {
 }
 
 extension MovieService: MoviesDBService {
-    public var mainRoute: String { return "discover/" }
+    public var mainRoute: String { return "" }
 
     public var requestConfiguration: RequestConfiguration {
         switch self {
@@ -32,7 +32,7 @@ extension MovieService: MoviesDBService {
             parameters["primary_release_year"] = 2024
             return RequestConfiguration(
                 method: .get,
-                path: mainRoute.appending("movie"),
+                path: mainRoute.appending("discover/movie"),
                 parameters: parameters,
                 encoding: URLEncoding.queryString,
                 language: language
@@ -44,7 +44,7 @@ extension MovieService: MoviesDBService {
             }
             return RequestConfiguration(
                 method: .get,
-                path: mainRoute.appending("\(id)"),
+                path: mainRoute.appending("movie/\(id)"),
                 parameters: parameters,
                 encoding: URLEncoding.default,
                 language: language
