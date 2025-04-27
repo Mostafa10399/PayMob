@@ -99,7 +99,7 @@ extension HomeRootViewController {
         var snapshot = DataSourceSnapshot()
         snapshot.appendSections(["Main"])
         snapshot.appendItems(movies, toSection: "Main")
-        datasource.apply(snapshot, animatingDifferences: true)
+        datasource.apply(snapshot, animatingDifferences: false)
     }
 }
 

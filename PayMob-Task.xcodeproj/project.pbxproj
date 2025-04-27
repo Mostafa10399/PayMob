@@ -14,7 +14,7 @@
 		04952B522DBC0BD5005F9CDB /* AppUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04952B492DBC0BD5005F9CDB /* AppUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04952C2E2DBCEEF7005F9CDB /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 04952C2D2DBCEEF7005F9CDB /* CombineCocoa */; };
 		04952C332DBCEF6C005F9CDB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04952C322DBCEF6C005F9CDB /* SnapKit */; };
-		04952C3E2DBCF23E005F9CDB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 04952C3D2DBCF23E005F9CDB /* Kingfisher */; };
+		04952DDE2DBDC1A9005F9CDB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 04952DDD2DBDC1A9005F9CDB /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,7 +217,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04952C3E2DBCF23E005F9CDB /* Kingfisher in Frameworks */,
+				04952DDE2DBDC1A9005F9CDB /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +340,7 @@
 			);
 			name = AppUIKit;
 			packageProductDependencies = (
-				04952C3D2DBCF23E005F9CDB /* Kingfisher */,
+				04952DDD2DBDC1A9005F9CDB /* Kingfisher */,
 			);
 			productName = AppUIKit;
 			productReference = 04952B492DBC0BD5005F9CDB /* AppUIKit.framework */;
@@ -1209,7 +1209,7 @@
 			package = 04952C312DBCEF66005F9CDB /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
-		04952C3D2DBCF23E005F9CDB /* Kingfisher */ = {
+		04952DDD2DBDC1A9005F9CDB /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 04952C3C2DBCF234005F9CDB /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
