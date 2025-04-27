@@ -23,7 +23,7 @@ public struct MovieListPresentable: Hashable {
         } else {
             thumbnail = ""
         }
-        self.movieRate = "\(movieTuple.movie.voteAverage ?? 0)"
+        self.movieRate =  String(format: "%.1f",movieTuple.movie.voteAverage ?? 0)
         self.title = movieTuple.movie.title ?? ""
         self.overview = movieTuple.movie.overview ?? ""
         self.isInWatchlist = movieTuple.isInWatchlist
