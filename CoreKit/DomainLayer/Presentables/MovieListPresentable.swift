@@ -14,6 +14,7 @@ public struct MovieListPresentable: Hashable {
     public var isInWatchlist: Bool
     public let year: Int
     public let id: Int
+    public let movieRate: String
     
     init(_ movieTuple: MovieWithWatchlist) {
         self.id = movieTuple.movie.id
@@ -22,6 +23,7 @@ public struct MovieListPresentable: Hashable {
         } else {
             thumbnail = ""
         }
+        self.movieRate = "\(movieTuple.movie.voteAverage ?? 0)"
         self.title = movieTuple.movie.title ?? ""
         self.overview = movieTuple.movie.overview ?? ""
         self.isInWatchlist = movieTuple.isInWatchlist
