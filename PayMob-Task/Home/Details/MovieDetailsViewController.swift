@@ -12,7 +12,7 @@ import AppUIKit
 import CoreKit
 
 public class MovieDetailsViewController: NiblessViewController {
-
+    
     // MARK: - Properties
     
     private let viewModel: MovieDetailsViewModel
@@ -21,7 +21,7 @@ public class MovieDetailsViewController: NiblessViewController {
     // DataSource & DataSourceSnapShot TypeAlias
     typealias DataSource = UITableViewDiffableDataSource<String, MovieDetailsPresentable>
     typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<String, MovieDetailsPresentable>
-        
+    
     // DataSource & DataSourceSnapShot
     private lazy var datasource = makeDataSource()
     private var datasourceSnapShot = DataSourceSnapshot()
@@ -35,25 +35,29 @@ public class MovieDetailsViewController: NiblessViewController {
         self.customView = view
         super.init()
     }
-
+    
     override public func loadView() {
         view = customView
     }
-
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = "Movie Details"
         observeErrorMessages()
-        viewModel.getData()
         bindViewModel()
+    }
+    
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.getData()
     }
     
     private func bindViewModel() {
         viewModel.list
             .receive(on: DispatchQueue.main)
             .sink { [weak self] movieDetails in
-                guard let strongSelf = self else { return }
-                strongSelf.updateSnapshot(with: movieDetails)
+                guard let strongSelf = self, let movie = movieDetails else { return }
+                strongSelf.updateSnapshot(with: movie)
             }
             .store(in: &cancellables)
     }
@@ -64,7 +68,7 @@ public class MovieDetailsViewController: NiblessViewController {
         snapshot.appendItems([movieDetails], toSection: "Main")
         datasource.apply(snapshot, animatingDifferences: false)
     }
-
+    
     private func observeErrorMessages() {
         viewModel
             .errorMessagesPublisher
@@ -86,16 +90,16 @@ extension MovieDetailsViewController {
             tableView,
             indexPath,
             movie in
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieDetailsCell", for: indexPath) as? MovieDetailsCell else {
-                    return UITableViewCell()
-                }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieDetailsCell", for: indexPath) as? MovieDetailsCell else {
+                return UITableViewCell()
+            }
             cell.configure(with: movie)
-                cell.watchlistButton.addTarget(
-                    self.viewModel,
-                    action: #selector(MovieDetailsViewModel.toggleWatchlist),
-                    for: .touchUpInside
-                )
-                return cell
+            cell.watchlistButton.addTarget(
+                self.viewModel,
+                action: #selector(MovieDetailsViewModel.toggleWatchlist),
+                for: .touchUpInside
+            )
+            return cell
         }
     }
 }
