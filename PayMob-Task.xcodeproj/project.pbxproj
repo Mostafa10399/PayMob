@@ -10,6 +10,8 @@
 		0425F6512DBB0145000D8755 /* CoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0425F6492DBB0145000D8755 /* CoreKit.framework */; };
 		0425F6522DBB0145000D8755 /* CoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0425F6492DBB0145000D8755 /* CoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0425F7002DBB0FCE000D8755 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0425F6FF2DBB0FCE000D8755 /* Alamofire */; };
+		045E27BE2DBE148800D899A0 /* CoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0425F6492DBB0145000D8755 /* CoreKit.framework */; };
+		045E27BF2DBE148800D899A0 /* CoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0425F6492DBB0145000D8755 /* CoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04952B512DBC0BD5005F9CDB /* AppUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04952B492DBC0BD5005F9CDB /* AppUIKit.framework */; };
 		04952B522DBC0BD5005F9CDB /* AppUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04952B492DBC0BD5005F9CDB /* AppUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04952C2E2DBCEEF7005F9CDB /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 04952C2D2DBCEEF7005F9CDB /* CombineCocoa */; };
@@ -19,6 +21,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		0425F64F2DBB0145000D8755 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0425F5462DBAF64E000D8755 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0425F6482DBB0145000D8755;
+			remoteInfo = CoreKit;
+		};
+		045E27C02DBE148800D899A0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0425F5462DBAF64E000D8755 /* Project object */;
 			proxyType = 1;
@@ -57,6 +66,17 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		045E27C22DBE148800D899A0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				045E27BF2DBE148800D899A0 /* CoreKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +89,9 @@
 		0425F5602DBAF64F000D8755 /* Exceptions for "PayMob-Task" folder in "PayMob-Task" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Envioments/Dev.xcconfig,
+				Envioments/Production.xcconfig,
+				Envioments/Staging.xcconfig,
 				Info.plist,
 			);
 			target = 0425F54D2DBAF64E000D8755 /* PayMob-Task */;
@@ -217,6 +240,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				045E27BE2DBE148800D899A0 /* CoreKit.framework in Frameworks */,
 				04952DDE2DBDC1A9005F9CDB /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,10 +354,12 @@
 				04952B452DBC0BD5005F9CDB /* Sources */,
 				04952B462DBC0BD5005F9CDB /* Frameworks */,
 				04952B472DBC0BD5005F9CDB /* Resources */,
+				045E27C22DBE148800D899A0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				045E27C12DBE148800D899A0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				04952B4A2DBC0BD5005F9CDB /* AppUIKit */,
@@ -448,6 +474,11 @@
 			target = 0425F6482DBB0145000D8755 /* CoreKit */;
 			targetProxy = 0425F64F2DBB0145000D8755 /* PBXContainerItemProxy */;
 		};
+		045E27C12DBE148800D899A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0425F6482DBB0145000D8755 /* CoreKit */;
+			targetProxy = 045E27C02DBE148800D899A0 /* PBXContainerItemProxy */;
+		};
 		04952B502DBC0BD5005F9CDB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 04952B482DBC0BD5005F9CDB /* AppUIKit */;
@@ -459,7 +490,7 @@
 		0425F5622DBAF64F000D8755 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(IC_BUNDLE_ICON)";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -491,7 +522,7 @@
 		0425F5632DBAF64F000D8755 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(IC_BUNDLE_ICON)";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -574,7 +605,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -633,7 +664,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -771,7 +802,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -779,13 +810,14 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Staging;
 		};
 		0425F6DB2DBB0454000D8755 /* Staging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(IC_BUNDLE_ICON)";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -802,6 +834,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mostafa.Building-Designs.PayMob-Task";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
