@@ -9,17 +9,17 @@
 import Foundation
 import Combine
 
-public final class MovieDetailsViewModel {
+public final class MovieDetailsViewModel: GetMovieDetailsUsecase {
     
     // MARK: - Properties
     
-    private let repository: MovieDetailsRepository
+    internal var repository: MovieDetailsRepository
     private let id: Int
     private let responder: ToggledWatchlistResponder
-    private let movieDetailsSubject = PassthroughSubject<MovieDetailsPresentable, Never>()
+    private let movieDetailsSubject = CurrentValueSubject<MovieDetailsPresentable?, Never>(nil)
     private let errorMessagesSubject = PassthroughSubject<ErrorMessage, Never>()
     private let isLoadingSubject = CurrentValueSubject<Bool, Never>(false)
-    public var list: AnyPublisher<MovieDetailsPresentable, Never> {
+    public var list: AnyPublisher<MovieDetailsPresentable?, Never> {
         movieDetailsSubject.eraseToAnyPublisher()
     }
     public var isLoading: AnyPublisher<Bool, Never> {
@@ -51,11 +51,9 @@ public final class MovieDetailsViewModel {
             strongSelf.isLoadingSubject.send(true)
             defer { strongSelf.isLoadingSubject.send(false) }
             do {
-                let movieDetails = try await strongSelf.repository.getMovieDetails(withId: strongSelf.id)
-                let presentableDetails = MovieDetailsPresentable(movieDetails)
+                let movieDetails = try await strongSelf.getMovieDetails(with: strongSelf.id)
                 await MainActor.run {
-                    print(presentableDetails)
-                    strongSelf.movieDetailsSubject.send(presentableDetails)
+                    strongSelf.movieDetailsSubject.send(movieDetails)
                 }
             } catch {
                 await MainActor.run {
@@ -70,16 +68,16 @@ public final class MovieDetailsViewModel {
     @objc
     public func toggleWatchlist() {
         Task { [weak self] in
-            guard let self = self else { return }
+            guard let strongSelf = self else { return }
             do {
-                let isInWatchlist = try await self.repository.toggleWatchlist(for: self.id)
-                self.responder.didToggleWatchlist(for: self.id)
-                let updatedMovieDetails = try await self.repository.getMovieDetails(withId: self.id)
-                let updatedPresentable = MovieDetailsPresentable(updatedMovieDetails)
-                    self.movieDetailsSubject.send(updatedPresentable)
+                let isInWatchlist = try await strongSelf.repository.toggleWatchlist(for: strongSelf.id)
+                strongSelf.responder.didToggleWatchlist(for: strongSelf.id)
+                guard var movie = strongSelf.movieDetailsSubject.value else { return }
+                movie.isInWatchlist = isInWatchlist
+                strongSelf.movieDetailsSubject.send(movie)
             } catch {
                 await MainActor.run {
-                    self.errorMessagesSubject.send(ErrorMessage(error: error))
+                    strongSelf.errorMessagesSubject.send(ErrorMessage(error: error))
                 }
             }
         }
