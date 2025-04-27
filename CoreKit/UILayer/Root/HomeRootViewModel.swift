@@ -107,6 +107,9 @@ public final class HomeRootViewModel: GetMoviesUsecase {
 
 extension HomeRootViewModel: ToggledWatchlistResponder {
     public func didToggleWatchlist(for id: Int) {
-        fetchHomeData()
-    }
-}
+        var movies = popularMoviesSubject.value
+        if let index = movies.firstIndex(where: { $0.id == id }) {
+            movies[index].isInWatchlist.toggle()
+            popularMoviesSubject.send(movies)
+        }
+    }}
