@@ -13,19 +13,16 @@ public enum MovieDetail: Hashable {
     }
     
     case movie(MovieDetailsPresentable)
-    case similar([MovieListPresentable])
     
     public var index: Int {
         switch self {
         case .movie: return 0
-        case .similar: return 1
         }
     }
     
     public var title: String {
         switch self {
         case .movie: return ""
-        case .similar: return "Similar movies"
         }
     }
 }

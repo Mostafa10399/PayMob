@@ -7,7 +7,6 @@
 
 import Foundation
 
-@MainActor
 public protocol WatchlistDataStore {
     func getWatchlist() async throws -> [Int]
     func isMovieInWatchlist(id: Int) async throws -> Bool
