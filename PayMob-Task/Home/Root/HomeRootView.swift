@@ -15,7 +15,7 @@ class HomeRootView: NiblessView {
     // MARK: - Properties
 
     let tableView = UITableView(frame: .zero, style: .plain).with {
-        $0.register(UINib(nibName: "MovieCell", bundle: Bundle(for: MovieCell.self)), forCellReuseIdentifier: "MovieCell")
+        $0.register(MovieCell.nib, forCellReuseIdentifier: MovieCell.reuseIdentifier)
         $0.backgroundColor = .clear
         $0.backgroundView = nil
         $0.showsVerticalScrollIndicator = false

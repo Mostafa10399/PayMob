@@ -10,7 +10,7 @@ import UIKit
 import CoreKit
 import Kingfisher
 
-final public class MovieCell: UITableViewCell {
+final public class MovieCell: UITableViewCell, Reusable {
     
     @IBOutlet weak var releaseYearLabel: UILabel!
     @IBOutlet weak var rateLabel: UILabel!

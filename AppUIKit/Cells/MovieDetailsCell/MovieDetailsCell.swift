@@ -9,7 +9,7 @@
 import UIKit
 import CoreKit
 
-final public class MovieDetailsCell: UITableViewCell {
+final public class MovieDetailsCell: UITableViewCell, Reusable {
 
     @IBOutlet weak var language: UILabel!
     @IBOutlet private(set) public weak var thumbnailImage: UIImageView!
